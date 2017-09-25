@@ -1,0 +1,4 @@
+change clock buttons to shapes instead of activeX buttons
+enlarge the clock box to do away with the ugly borders
+remove the auto horizontal scrolling when choosing bp and dl
+make sure that the loading chart stays at the same place
