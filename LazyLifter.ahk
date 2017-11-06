@@ -18,8 +18,10 @@ PgDn::
 Cell := ComObjActive("Excel.Application").ActiveCell
 if (Cell.Value) {
 	Cell.Value += 2.5
-} else {
+} else if Abs(Cell.Offset(0, -1).Value) > 0 {
 	Cell.Value := Abs(Cell.Offset(0, -1).Value) + 2.5
+} else {
+	
 }
 return
 
@@ -28,7 +30,27 @@ PgUp::
 Cell := ComObjActive("Excel.Application").ActiveCell
 if (Cell.Value) {
 	Cell.Value -= 2.5
-} else {
+} else if Abs(Cell.Offset(0, -1).Value) > 0 {
 	Cell.Value := Abs(Cell.Offset(0, -1).Value) - 2.5
+} else {
+	
 }
 return
+
+^1:: ComObjActive("Excel.Application").Range("C4").Value := "Squat 1"
+
+^2:: ComObjActive("Excel.Application").Range("C4").Value := "Squat 2"
+
+^3:: ComObjActive("Excel.Application").Range("C4").Value := "Squat 3"
+
+^4:: ComObjActive("Excel.Application").Range("C4").Value := "Bench Press 1"
+
+^5:: ComObjActive("Excel.Application").Range("C4").Value := "Bench Press 2"
+
+^6:: ComObjActive("Excel.Application").Range("C4").Value := "Bench Press 3"
+
+^7:: ComObjActive("Excel.Application").Range("C4").Value := "Deadlift 1"
+
+^8:: ComObjActive("Excel.Application").Range("C4").Value := "Deadlift 2"
+
+^9:: ComObjActive("Excel.Application").Range("C4").Value := "Deadlift 3"
