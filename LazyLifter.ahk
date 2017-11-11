@@ -13,13 +13,15 @@ Up::Send ^j
 ;no lift
 Down::Send ^k
 
-;the page down key adds +2.5 to the active cell, or if the the active cell is empty it will be set to the value of the cell to the left +2.5
+;the page down key adds +2.5 to the active cell, or if the the active cell is empty it will be set to the value of the cell to the left (+2.5 if the previous attempt was successful)
 PgDn::
 Cell := ComObjActive("Excel.Application").ActiveCell
 if (Cell.Value) {
 	Cell.Value += 2.5
-} else if Abs(Cell.Offset(0, -1).Value) > 0 {
+} else if Cell.Offset(0, -1).Value > 0 {
 	Cell.Value := Abs(Cell.Offset(0, -1).Value) + 2.5
+} else if Cell.Offset(0, -1).Value < 0 {
+	Cell.Value := Abs(Cell.Offset(0, -1).Value)
 } else {
 	
 }
@@ -32,6 +34,36 @@ if (Cell.Value) {
 	Cell.Value -= 2.5
 } else if Abs(Cell.Offset(0, -1).Value) > 0 {
 	Cell.Value := Abs(Cell.Offset(0, -1).Value) - 2.5
+} else if Cell.Offset(0, -1).Value < 0 {
+	Cell.Value := Abs(Cell.Offset(0, -1).Value)
+} else {
+	
+}
+return
+
+;ctrl + page down key does the same as above but with +5
+^PgDn::
+Cell := ComObjActive("Excel.Application").ActiveCell
+if (Cell.Value) {
+	Cell.Value += 5
+} else if Cell.Offset(0, -1).Value > 0 {
+	Cell.Value := Abs(Cell.Offset(0, -1).Value) + 5
+} else if Cell.Offset(0, -1).Value < 0 {
+	Cell.Value := Abs(Cell.Offset(0, -1).Value)
+} else {
+	
+}
+return
+
+;-5
+^PgUp::
+Cell := ComObjActive("Excel.Application").ActiveCell
+if (Cell.Value) {
+	Cell.Value -= 5
+} else if Cell.Offset(0, -1).Value > 0 {
+	Cell.Value := Abs(Cell.Offset(0, -1).Value) - 5
+} else if Cell.Offset(0, -1).Value < 0 {
+	Cell.Value := Abs(Cell.Offset(0, -1).Value)
 } else {
 	
 }
